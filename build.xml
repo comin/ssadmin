@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="all" name="admin">
+	<target depends="init, adminJar" description="Build everything." name="all" />
+	<target name="init">
+		<property location="bin/" name="bin.dir" />
+		<property location="src/" name="src.dir" />
+		<property location="lib/" name="lib.dir" />
+		<property location="deploy/" name="deploy.dir" />
+		<property name="project.name" value="${ant.project.name}" />
+		<property location="${deploy.dir}/admin.jar" name="jaradmin" />
+	</target>
+	<target depends="init, clean" name="adminJar">
+		<mkdir dir="${deploy.dir}" />
+		<jar compress="true" jarfile="${jaradmin}">
+			<manifest>
+				<attribute name="Built-By" value="ONetwork" />
+			</manifest>
+			<fileset dir="${bin.dir}">
+				<include name="com/onetwork/**" />
+			</fileset>
+		</jar>
+	</target>
+	<target depends="init" description="Clean all build products." name="clean">
+		<delete dir="${deploy.dir}" />
+	</target>
+</project>
