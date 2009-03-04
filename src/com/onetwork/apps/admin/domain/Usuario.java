@@ -1,5 +1,6 @@
 package com.onetwork.apps.admin.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 import org.json.JSONObjectImpl;
 
 import com.onetwork.domain.Domain;
+import com.onetwork.servlet.Application;
 import com.onetwork.servlet.Resource;
 import com.onetwork.servlet.ResourceType;
 
@@ -35,6 +37,7 @@ public class Usuario extends Domain {
 	private Endereco endereco;
 	private List<Conta> contas;
 	private PreferenciasPessoais preferenciasPessoais;
+	private boolean logado;
 	
 	public Usuario() {}
 
@@ -88,11 +91,29 @@ public class Usuario extends Domain {
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="USUARIO")
 	public List<Conta> getContas() {
-		return contas;
+		return contas != null ? contas : (contas = new ArrayList<Conta>());
 	}
 
 	public void setContas(List<Conta> contas) {
 		this.contas = contas;
+	}
+	
+	public void adicionarNovaConta(Conta conta) throws ContaExistenteException {
+		Conta contaExistente = procuraPorContaDaAplicacao(conta.getApplication());
+		if (contaExistente == null) this.getContas().add(conta);
+		else throw new ContaExistenteException("Usuário já contem uma conta para esta aplicação!");
+	}
+	
+	public Conta procuraPorContaDaAplicacao(Application application) {
+		Conta conta = null;
+		List<Conta> cachedContas = this.getContas();
+		for (Conta cachedConta : cachedContas) {
+			if (cachedConta.getApplication().equals(application)) {
+				conta = cachedConta;
+				break;
+			}
+		}
+		return conta;
 	}
 
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
@@ -140,5 +161,13 @@ public class Usuario extends Domain {
 		jsonUser.put("contas",usuario.getContas());
 		jsonUser.put("preferenciasPessoais",usuario.getPreferenciasPessoais());
 		return jsonUser;
+	}
+
+	public boolean isLogado() {
+		return this.logado;
+	}
+
+	public void setLogado(boolean estaLogado) {
+		this.logado = estaLogado;
 	}
 }
