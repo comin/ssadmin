@@ -9,15 +9,29 @@ import org.json.JSONObject;
 import org.json.JSONObjectImpl;
 
 import com.onetwork.apps.admin.domain.Usuario;
-import com.onetwork.controller.Controller;
+import com.onetwork.controller.SecurityController;
+import com.onetwork.controller.SemProtecaoDeAcesso;
 import com.onetwork.servlet.Application;
 
-public class UsuarioController extends Controller<Usuario> {
+public class UsuarioController extends SecurityController<Usuario> {
 
 	public UsuarioController() {
 		super(Application.Administration);
 	}
 
+	@Override
+	public Class<Usuario> getSessionClass() {
+		return Usuario.class;
+	}
+
+	@SemProtecaoDeAcesso
+	public void login() throws IOException {
+		Usuario user = Usuario.login(json());
+		if (user != null) noticaLoginOk(user);
+		else notificaLoginComFalha();
+	}
+	
+	@SemProtecaoDeAcesso
 	public void addNewUser() throws Exception {
 		JSONObject jsonObject = this.json();
 		if (!Usuario.existUserWithLogin(jsonObject.getString("login"))) {
@@ -57,24 +71,14 @@ public class UsuarioController extends Controller<Usuario> {
 		JSONArray jsonUsers = new JSONArrayImpl();
 		if (listaUsuarios != null) for (Usuario usuario : listaUsuarios) jsonUsers.put(Usuario.userToJSON(usuario));
 		this.getView().write(jsonUsers);
-	}
-
-	public void login() throws IOException {
-		Usuario user = Usuario.login(json());
-		if (user != null) {
-			noticaLoginOk(user);
-		} else {
-			notificaLoginComFalha();
-		}
-	}
+	}	
 
 	private void notificaLoginComFalha() throws IOException {
-		JSONObject jsonUser = new JSONObjectImpl();
-		jsonUser.put("oid", "undefined");
-		this.getView().write(jsonUser);
+		this.getView().writeErrorMesage("Login ou Password invalido!");
 	}
 
 	private void noticaLoginOk(Usuario user) throws IOException {
+		this.setUsuarioDaSessao(user);
 		JSONObject jsonUser = new JSONObjectImpl();
 		jsonUser.put("oid", user.getOid());
 		jsonUser.put("nome", user.getNome());

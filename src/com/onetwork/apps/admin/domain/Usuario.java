@@ -141,6 +141,15 @@ public class Usuario extends Domain {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public static Usuario findByLoginAndPassword(String where) {
+		EntityManager entityManager = Resource.get(ResourceType.PrevalentSystem);
+		Query query = entityManager.createQuery("from "+Usuario.class.getName()+" as obj where "+where);
+		List<Usuario> listaUsuario = query.getResultList();
+		if (listaUsuario != null && listaUsuario.size() > 0) return listaUsuario.get(0); 
+		else return null;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public static List<Usuario> findAll() {
 		EntityManager entityManager = Resource.get(ResourceType.PrevalentSystem);
 		Query query = entityManager.createQuery("from "+Usuario.class.getName()+" as obj");
@@ -148,7 +157,7 @@ public class Usuario extends Domain {
 	}
 
 	public static Usuario login(JSONObject json) {
-		return null;
+		return Usuario.findByLoginAndPassword(" obj.login = '"+json.getString("login")+"' AND obj.password = '"+json.getString("password")+"'");
 	}
 	
 	public static JSONObject userToJSON(Usuario usuario) {
