@@ -1,0 +1,28 @@
+Módulo de administração de usuários e contas para aplicações SoftSimples.
+
+>>>>>>>> O símbolo ">" indica prioridade, quanto mais símbolos ">" precederem a atividade mais importnete ela é!
+
+Objetivos do módulo 
+===================
+1.  >>>>> Cadastrar Usuário
+2.  >>>>> Remover Usuário
+3.  >>>>> Alterar Usuário
+4.  >>>> Pesquisar Usuário
+5.  >> Ativar ou desativar usuário
+6.  >>Criar profile completo para usuário com avatar
+7.  >>>>> Fazer login no sistema
+8.  >> Fazer logout do sistema
+9.  >>>>> Controlar sessão do usuário
+10. >> Gerênciar contas de usuário
+11. Emissão de cobrança de contas plus para usuários
+12. Envio de email avisando de cobrança
+13. Integração com sistema de cobrança da locaweb(cartão e boleto)
+14. Integração com pagseguro
+15. Inativar contas plus de usuários inadimplentes
+16. >> Emitir relatório dos acessos do usuário
+17. >> Emitir relatório de uso dos módulos pelo usuário
+18. >> Emitir relatório de usuários por região
+19. Emitir relatório de usuários inativos
+20. Emitir relátório de usuarios inadimplentes
+21. >>> Email marketing.
+
