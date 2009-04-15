@@ -5,29 +5,23 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Query;
-import javax.persistence.Table;
 
 import org.json.JSONObject;
 import org.json.JSONObjectImpl;
 
 import com.onetwork.domain.Domain;
-import com.onetwork.servlet.Application;
 import com.onetwork.servlet.Resource;
 import com.onetwork.servlet.ResourceType;
 
-@Entity
-@Table(name="USUARIO")
-@Inheritance(strategy=InheritanceType.JOINED)
-public class Usuario extends Domain {
+@MappedSuperclass
+public abstract class Usuario extends Domain {
 
 	private static final long serialVersionUID = 1L;
 	private String nome;
@@ -104,16 +98,17 @@ public class Usuario extends Domain {
 		else throw new ContaExistenteException("Usuário já contem uma conta para esta aplicação!");
 	}
 	
-	public Conta procuraPorContaDaAplicacao(Application application) {
+	@SuppressWarnings("unchecked")
+	public <T> T procuraPorContaDaAplicacao(String application) {
 		Conta conta = null;
 		List<Conta> cachedContas = this.getContas();
 		for (Conta cachedConta : cachedContas) {
-			if (cachedConta.getApplication().equals(application)) {
+			if (cachedConta.getApplication().equalsIgnoreCase(application)) {
 				conta = cachedConta;
 				break;
 			}
 		}
-		return conta;
+		return (T)conta;
 	}
 
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
@@ -132,9 +127,9 @@ public class Usuario extends Domain {
 	};
 
 	@SuppressWarnings("unchecked")
-	public static Usuario findByLogin(String where) {
+	public static Usuario findByLogin(String login) {
 		EntityManager entityManager = Resource.get(ResourceType.PrevalentSystem);
-		Query query = entityManager.createQuery("from "+Usuario.class.getName()+" as obj where "+where);
+		Query query = entityManager.createQuery("from "+Usuario.class.getName()+" as obj where obj.login = '"+login+"'");
 		List<Usuario> listaUsuario = query.getResultList();
 		if (listaUsuario != null && listaUsuario.size() > 0) return listaUsuario.get(0); 
 		else return null;
@@ -179,4 +174,6 @@ public class Usuario extends Domain {
 	public void setLogado(boolean estaLogado) {
 		this.logado = estaLogado;
 	}
+	
+	public abstract boolean isMaster(); 
 }
