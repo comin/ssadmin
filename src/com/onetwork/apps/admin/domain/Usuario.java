@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Query;
+import javax.persistence.Transient;
 
 import org.json.JSONObject;
 import org.json.JSONObjectImpl;
@@ -28,7 +29,6 @@ public abstract class Usuario extends Domain {
 	private String login;
 	private String password;
 	private List<Endereco> enderecos;
-	private Endereco endereco;
 	private List<Conta> contas;
 	private PreferenciasPessoais preferenciasPessoais;
 	private boolean logado;
@@ -70,16 +70,6 @@ public abstract class Usuario extends Domain {
 
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
-	}
-
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="ENDERECO")
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
@@ -161,7 +151,6 @@ public abstract class Usuario extends Domain {
 		jsonUser.put("login", usuario.getLogin());
 		jsonUser.put("password", usuario.getPassword());
 		jsonUser.put("enderecos", usuario.getEnderecos());
-		jsonUser.put("endereco", usuario.getEndereco());
 		jsonUser.put("contas",usuario.getContas());
 		jsonUser.put("preferenciasPessoais",usuario.getPreferenciasPessoais());
 		return jsonUser;
@@ -175,5 +164,8 @@ public abstract class Usuario extends Domain {
 		this.logado = estaLogado;
 	}
 	
-	public abstract boolean isMaster(); 
+	@Transient
+	public abstract boolean isMaster();
+	
+	public void setMaster(boolean master){};
 }

@@ -1,13 +1,18 @@
 package com.onetwork.apps.admin.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 import com.onetwork.domain.Domain;
 
-@MappedSuperclass
+@Entity
+@Table(name="CONTA")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Conta extends Domain {
 
 	private static final long serialVersionUID = 1L;

@@ -27,7 +27,7 @@ public class UsuarioController extends SecurityController<Usuario> {
 	}
 
 	@SemProtecaoDeAcesso
-	public void login() throws IOException {
+	public void login() throws Exception {
 		Usuario user = Usuario.login(json());
 		if (user != null) noticaLoginOk(user);
 		else notificaLoginComFalha();

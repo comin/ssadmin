@@ -12,8 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name="BAIRRO")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Table(name = "BAIRRO")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Bairro extends Domain {
 
 
@@ -23,7 +23,7 @@ public class Bairro extends Domain {
 	
 	public Bairro() {}
 
-	@Column(name="NOME")
+	@Column(name = "NOME")
 	public String getNome() {
 		return nome;
 	}
@@ -32,8 +32,8 @@ public class Bairro extends Domain {
 		this.nome = nome;
 	}
 
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="CIDADE")
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "CIDADE")
 	public Cidade getCidade() {
 		return cidade;
 	}

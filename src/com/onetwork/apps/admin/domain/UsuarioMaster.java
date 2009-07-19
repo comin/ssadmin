@@ -10,6 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="USUARIOMASTER")
@@ -32,6 +33,7 @@ public class UsuarioMaster extends Usuario {
 	}
 
 	@Override
+	@Transient
 	public boolean isMaster() {
 		return true;
 	}
