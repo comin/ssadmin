@@ -29,8 +29,8 @@ public class UsuarioController extends SecurityController<Usuario> {
 	@SemProtecaoDeAcesso
 	public void login() throws Exception {
 		Usuario user = Usuario.login(json());
-		if (user != null) noticaLoginOk(user);
-		else notificaLoginComFalha();
+		if (user == null) throw new LoginOuPasswordException();
+		noticaLoginOk(user);
 	}
 	
 	public void logout() throws IOException {
@@ -41,10 +41,6 @@ public class UsuarioController extends SecurityController<Usuario> {
 		JSONObject jsonUser = new JSONObjectImpl();
 		jsonUser.put("nome", usuario.getNome());
 		this.getView().write(jsonUser);
-	}
-	
-	private void notificaLoginComFalha() throws IOException {
-		this.getView().writeErrorMesage("Login ou Password invalido!");
 	}
 
 	private void noticaLoginOk(Usuario user) throws IOException {
@@ -58,23 +54,21 @@ public class UsuarioController extends SecurityController<Usuario> {
 	public void adicionarUsuarioMaster() throws Exception {
 		JSONObject jsonObject = this.json();
 		Usuario usuario = Usuario.findByLogin(jsonObject.getString("login"));
-		if (usuario == null) {
-			UsuarioMaster usuarioMaster = buildNewInstance(UsuarioMaster.class);
-			usuarioMaster.properties(jsonObject);
-			usuarioMaster.save();
-			this.escreverVODeCadastroOK(usuarioMaster);
-		} else this.getView().writeErrorMesage("Já existe usuário com este login cadastrado!");
+		if (usuario != null) throw new JaExisteUsuarioComEsteLoginException();
+		UsuarioMaster usuarioMaster = buildNewInstance(UsuarioMaster.class);
+		usuarioMaster.properties(jsonObject);
+		usuarioMaster.save();
+		this.escreverVODeCadastroOK(usuarioMaster);
 	}
 	
 	public void adicionarUsuarioSlave() throws Exception {
 		JSONObject jsonObject = this.json();
 		Usuario usuario = Usuario.findByLogin(jsonObject.getString("login"));
-		if (usuario == null) {
-			UsuarioSlave usuarioSlave = buildNewInstance(UsuarioSlave.class);
-			usuarioSlave.properties(jsonObject);
-			usuarioSlave.save();
-			this.escreverVODeCadastroOK(usuarioSlave);
-		} else this.getView().writeErrorMesage("Já existe usuário com este login cadastrado!");
+		if (usuario != null) throw new JaExisteUsuarioComEsteLoginException();
+		UsuarioSlave usuarioSlave = buildNewInstance(UsuarioSlave.class);
+		usuarioSlave.properties(jsonObject);
+		usuarioSlave.save();
+		this.escreverVODeCadastroOK(usuarioSlave);
 	}
 	
 	public void escreverVODeCadastroOK(Usuario usuario) throws Exception {
@@ -87,21 +81,19 @@ public class UsuarioController extends SecurityController<Usuario> {
 	public void removerUsuarioMaster() throws Exception {
 		JSONObject jsonObject = this.json();
 		Usuario usuario = Usuario.findByLogin(jsonObject.getString("login"));
-		if (usuario != null) {
-			UsuarioMaster usuarioMaster = buildNewInstance(UsuarioMaster.class);
-			usuarioMaster.delete();
-			this.escreverVODeCadastroOK(usuarioMaster);
-		} else this.getView().writeErrorMesage("Este usuário não esta cadastrado!");
+		if (usuario == null) throw new UsuarioNaoCadastrado();
+		UsuarioMaster usuarioMaster = buildNewInstance(UsuarioMaster.class);
+		usuarioMaster.delete();
+		this.escreverVODeCadastroOK(usuarioMaster);
 	}
 	
 	public void removerUsuarioSlave() throws Exception {
 		JSONObject jsonObject = this.json();
 		Usuario usuario = Usuario.findByLogin(jsonObject.getString("login"));
-		if (usuario != null) {
-			UsuarioSlave usuarioSlave = buildNewInstance(UsuarioSlave.class);
-			usuarioSlave.delete();
-			this.escreverVODeCadastroOK(usuarioSlave);
-		} else this.getView().writeErrorMesage("Este usuário não esta cadastrado!");
+		if (usuario == null) throw new UsuarioNaoCadastrado();
+		UsuarioSlave usuarioSlave = buildNewInstance(UsuarioSlave.class);
+		usuarioSlave.delete();
+		this.escreverVODeCadastroOK(usuarioSlave);
 	}
 
 	public void allUsers() throws IOException {		

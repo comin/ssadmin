@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 
 @Entity
-@Table(name="PREFERENCIASPESSOAIS")
+@Table(name="PREFERENCIAS_PESSOAIS")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class PreferenciasPessoais extends Domain {
 
@@ -57,7 +57,7 @@ public class PreferenciasPessoais extends Domain {
 		this.relacionamentos = relacionamentos;
 	}
 
-	@Column(name="JOGOSELETRONICOS")
+	@Column(name="JOGOS_ELETRONICOS")
 	public boolean isJogosEletronicos() {
 		return jogosEletronicos;
 	}

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="USUARIOSLAVE")
+@Table(name="USUARIO_SLAVE")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class UsuarioSlave extends Usuario {
 	

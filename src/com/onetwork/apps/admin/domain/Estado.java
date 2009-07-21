@@ -1,5 +1,7 @@
 package com.onetwork.apps.admin.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.onetwork.domain.Domain;
@@ -20,7 +22,7 @@ public class Estado extends Domain {
 	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String uf;
-	private Pais pais;
+	private List<Cidade> cidades;
 	
 	public Estado() {}
 
@@ -42,13 +44,13 @@ public class Estado extends Domain {
 		this.uf = uf;
 	}
 
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="PAIS")
-	public Pais getPais() {
-		return pais;
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="ESTADO")
+	public List<Cidade> getCidades() {
+		return cidades;
 	}
 
-	public void setPais(Pais pais) {
-		this.pais = pais;
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
 	}
 }

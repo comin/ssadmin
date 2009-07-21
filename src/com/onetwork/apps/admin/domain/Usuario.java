@@ -1,6 +1,7 @@
 package com.onetwork.apps.admin.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Query;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.json.JSONObject;
@@ -26,15 +29,18 @@ public abstract class Usuario extends Domain {
 
 	private static final long serialVersionUID = 1L;
 	private String nome;
+	private String avatar;	
 	private String login;
 	private String password;
+	private Date dataNascimento;
 	private List<Endereco> enderecos;
 	private List<Conta> contas;
 	private PreferenciasPessoais preferenciasPessoais;
 	private boolean logado;
+	public static final String USUARIO_NAO_TEM_CONTA_PARA_ESTE_SERVICO = "Usuário não tem conta para este serviço"; 
 	
 	public Usuario() {}
-
+	
 	@Column(name="NOME")
 	public String getNome() {
 		return nome;
@@ -42,6 +48,15 @@ public abstract class Usuario extends Domain {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	@Column(name="AVATAR")
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	@Column(name="LOGIN")
@@ -60,6 +75,16 @@ public abstract class Usuario extends Domain {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="DATA_NASCIMENTO")
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
@@ -102,7 +127,7 @@ public abstract class Usuario extends Domain {
 	}
 
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="PREFERENCIASPESSOAIS")
+	@JoinColumn(name="PREFERENCIAS_PESSOAIS")
 	public PreferenciasPessoais getPreferenciasPessoais() {
 		return preferenciasPessoais;
 	}

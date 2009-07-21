@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="USUARIOMASTER")
+@Table(name="USUARIO_MASTER")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class UsuarioMaster extends Usuario {
 

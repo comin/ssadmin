@@ -17,6 +17,7 @@
 			</manifest>
 			<fileset dir="${bin.dir}">
 				<include name="com/onetwork/**" />
+				<exclude name="com/onetwork/**/*Harness*.class" />
 			</fileset>
 		</jar>
 	</target>

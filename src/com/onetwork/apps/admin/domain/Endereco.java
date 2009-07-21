@@ -74,7 +74,7 @@ public class Endereco extends Domain {
 		this.bairro = bairro;
 	}
 
-	@Column(name="TIPOENDERECO")
+	@Column(name="TIPO_ENDERECO")
 	@Enumerated(EnumType.STRING)
 	public TipoEndereco getTipoEndereco() {
 		return tipoEndereco;
