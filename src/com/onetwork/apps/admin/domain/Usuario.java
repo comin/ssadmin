@@ -100,7 +100,8 @@ public abstract class Usuario extends Domain {
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="USUARIO")
 	public List<Conta> getContas() {
-		return contas != null ? contas : (contas = new ArrayList<Conta>());
+		if (contas == null) this.contas = new ArrayList<Conta>();
+		return contas;
 	}
 
 	public void setContas(List<Conta> contas) {

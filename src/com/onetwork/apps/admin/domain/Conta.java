@@ -1,25 +1,20 @@
 package com.onetwork.apps.admin.domain;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 import com.onetwork.domain.Domain;
 
-@Entity
-@Table(name="CONTA")
-@Inheritance(strategy=InheritanceType.JOINED)
-public class Conta extends Domain {
+@MappedSuperclass
+public abstract class Conta extends Domain {
 
 	private static final long serialVersionUID = 1L;
 
 	private int acessos;
 	private boolean ativa;
-	private String application;
 	private TipoConta tipoConta;
 
 	public Conta() {}
@@ -42,14 +37,8 @@ public class Conta extends Domain {
 		this.ativa = ativa;
 	}
 
-	@Column(name="APPLICATION")
-	public String getApplication() {
-		return application;
-	}
-
-	public void setApplication(String application) {
-		this.application = application;
-	}
+	@Transient
+	public abstract String getApplication();
 
 	@Column(name="TIPOCONTA")
 	@Enumerated(EnumType.ORDINAL)
