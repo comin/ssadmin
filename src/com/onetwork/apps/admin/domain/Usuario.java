@@ -194,4 +194,10 @@ public abstract class Usuario extends Domain {
 	public abstract boolean isMaster();
 	
 	public void setMaster(boolean master){};
+	
+	public Conta tenhoContaNesteServico(String application) throws UsuarioSemContaParaOServicoException {
+		Conta conta = this.procuraPorContaDaAplicacao(application);
+		if (conta == null) throw new UsuarioSemContaParaOServicoException();
+		return conta;
+	}
 }
