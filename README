@@ -1,4 +1,7 @@
-Módulo de administração de usuários e contas para aplicações SoftSimples.
+SSAdmin Plugin
+==============
+
+Módulo de administração de usuários e contas para aplicações usando o SSWebFramework.
 
 >>>>>>>> O símbolo ">" indica prioridade, quanto mais símbolos ">" precederem a atividade mais importnete ela é!
 
@@ -24,5 +27,3 @@ Objetivos do módulo
 18. >> Emitir relatório de usuários por região
 19. Emitir relatório de usuários inativos
 20. Emitir relátório de usuarios inadimplentes
-21. >>> Email marketing.
-
