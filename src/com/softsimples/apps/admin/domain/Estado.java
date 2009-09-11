@@ -1,4 +1,4 @@
-package com.onetwork.apps.admin.domain;
+package com.softsimples.apps.admin.domain;
 
 import java.util.List;
 
@@ -12,18 +12,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.onetwork.domain.Domain;
+import com.softsimples.domain.Domain;
 
 @Entity
-@Table(name="CIDADE")
+@Table(name="ENTADO")
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Cidade extends Domain {
+public class Estado extends Domain {
 
 	private static final long serialVersionUID = 1L;
 	private String nome;
-	private List<Bairro> bairros; 
+	private String uf;
+	private List<Cidade> cidades;
 	
-	public Cidade() {}
+	public Estado() {}
 
 	@Column(name="NOME")
 	public String getNome() {
@@ -34,13 +35,22 @@ public class Cidade extends Domain {
 		this.nome = nome;
 	}
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="CIDADE")
-	public List<Bairro> getBairros() {
-		return bairros;
+	@Column(name="UF")
+	public String getUf() {
+		return uf;
 	}
 
-	public void setBairros(List<Bairro> bairros) {
-		this.bairros = bairros;
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="ESTADO")
+	public List<Cidade> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
 	}
 }

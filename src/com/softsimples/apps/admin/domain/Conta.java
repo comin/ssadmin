@@ -1,4 +1,4 @@
-package com.onetwork.apps.admin.domain;
+package com.softsimples.apps.admin.domain;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -6,7 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
-import com.onetwork.domain.Domain;
+import com.softsimples.domain.Domain;
 
 @MappedSuperclass
 public abstract class Conta extends Domain {

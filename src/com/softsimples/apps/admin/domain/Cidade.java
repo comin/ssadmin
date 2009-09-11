@@ -1,4 +1,4 @@
-package com.onetwork.apps.admin.domain;
+package com.softsimples.apps.admin.domain;
 
 import java.util.List;
 
@@ -12,19 +12,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.onetwork.domain.Domain;
+import com.softsimples.domain.Domain;
 
 @Entity
-@Table(name="ENTADO")
+@Table(name="CIDADE")
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Estado extends Domain {
+public class Cidade extends Domain {
 
 	private static final long serialVersionUID = 1L;
 	private String nome;
-	private String uf;
-	private List<Cidade> cidades;
+	private List<Bairro> bairros; 
 	
-	public Estado() {}
+	public Cidade() {}
 
 	@Column(name="NOME")
 	public String getNome() {
@@ -35,22 +34,13 @@ public class Estado extends Domain {
 		this.nome = nome;
 	}
 
-	@Column(name="UF")
-	public String getUf() {
-		return uf;
-	}
-
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
-
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="ESTADO")
-	public List<Cidade> getCidades() {
-		return cidades;
+	@JoinColumn(name="CIDADE")
+	public List<Bairro> getBairros() {
+		return bairros;
 	}
 
-	public void setCidades(List<Cidade> cidades) {
-		this.cidades = cidades;
+	public void setBairros(List<Bairro> bairros) {
+		this.bairros = bairros;
 	}
 }

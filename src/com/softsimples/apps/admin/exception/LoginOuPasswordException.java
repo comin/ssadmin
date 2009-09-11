@@ -1,4 +1,4 @@
-package com.onetwork.apps.admin.controller;
+package com.softsimples.apps.admin.exception;
 
 public class LoginOuPasswordException extends Exception {
 

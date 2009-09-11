@@ -1,17 +1,18 @@
-package com.onetwork.apps.admin.domain;
+package com.softsimples.apps.admin.domain;
 
-import com.onetwork.domain.Domain;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.softsimples.domain.Domain;
 
 @Entity
 @Table(name="ENDERECO")

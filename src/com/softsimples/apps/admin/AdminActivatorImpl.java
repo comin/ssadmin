@@ -1,19 +1,19 @@
-package com.onetwork.apps.admin;
+package com.softsimples.apps.admin;
 
-import com.onetwork.activator.Activator;
+import com.softsimples.activator.Activator;
 
 
-public class ActivatorImpl extends Activator {
+public class AdminActivatorImpl extends Activator {
 
 	private static final String APPLICATION = "admin";
 	private static Activator INSTANCE = null;
 	
-	private ActivatorImpl() {
+	private AdminActivatorImpl() {
 		super(APPLICATION);
 	}
 	
 	public static Activator getInstance() {
-		if (INSTANCE == null) INSTANCE = new ActivatorImpl();
+		if (INSTANCE == null) INSTANCE = new AdminActivatorImpl();
 		return INSTANCE;
 	}
 

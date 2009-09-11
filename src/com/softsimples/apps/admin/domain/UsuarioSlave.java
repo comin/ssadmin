@@ -1,4 +1,4 @@
-package com.onetwork.apps.admin.domain;
+package com.softsimples.apps.admin.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

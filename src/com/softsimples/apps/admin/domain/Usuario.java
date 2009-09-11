@@ -1,4 +1,4 @@
-package com.onetwork.apps.admin.domain;
+package com.softsimples.apps.admin.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,9 +20,14 @@ import javax.persistence.Transient;
 import org.json.JSONObject;
 import org.json.JSONObjectImpl;
 
-import com.onetwork.domain.Domain;
-import com.onetwork.servlet.Resource;
-import com.onetwork.servlet.ResourceType;
+import com.softsimples.apps.admin.exception.ContaExistenteException;
+import com.softsimples.apps.admin.exception.JaExisteUsuarioComEsteLoginException;
+import com.softsimples.apps.admin.exception.LoginOuPasswordException;
+import com.softsimples.apps.admin.exception.UsuarioNaoCadastradoException;
+import com.softsimples.apps.admin.exception.UsuarioSemContaParaOServicoException;
+import com.softsimples.domain.Domain;
+import com.softsimples.servlet.Resource;
+import com.softsimples.servlet.ResourceType;
 
 @MappedSuperclass
 public abstract class Usuario extends Domain {
@@ -167,8 +172,10 @@ public abstract class Usuario extends Domain {
 		return (List<Usuario>)query.getResultList();
 	}
 
-	public static Usuario login(JSONObject json) {
-		return Usuario.findByLoginAndPassword(" obj.login = '"+json.getString("login")+"' AND obj.password = '"+json.getString("password")+"'");
+	public static Usuario login(JSONObject json) throws LoginOuPasswordException {
+		Usuario usuario = Usuario.findByLoginAndPassword(" obj.login = '"+json.getString("login")+"' AND obj.password = '"+json.getString("password")+"'");
+		if (usuario == null) throw new LoginOuPasswordException();
+		return usuario;
 	}
 	
 	public static JSONObject userToJSON(Usuario usuario) {
@@ -199,5 +206,16 @@ public abstract class Usuario extends Domain {
 		Conta conta = this.procuraPorContaDaAplicacao(application);
 		if (conta == null) throw new UsuarioSemContaParaOServicoException();
 		return conta;
+	}
+
+	public static void jaExisteUsuarioComEsteLoginParaCadastro(String login) throws JaExisteUsuarioComEsteLoginException {
+		Usuario usuario = Usuario.findByLogin(login);
+		if (usuario != null) throw new JaExisteUsuarioComEsteLoginException();
+	}
+	
+	public static Usuario existeUsuarioComEsteOidParaExclusao(String oid) throws UsuarioNaoCadastradoException {
+		Usuario usuario = Usuario.findByOid(Usuario.class, oid);
+		if (usuario != null) throw new UsuarioNaoCadastradoException();
+		return usuario;
 	}
 }

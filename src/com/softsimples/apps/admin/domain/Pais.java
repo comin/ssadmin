@@ -1,4 +1,4 @@
-package com.onetwork.apps.admin.domain;
+package com.softsimples.apps.admin.domain;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.onetwork.domain.Domain;
+import com.softsimples.domain.Domain;
 
 @Entity
 @Table(name="PAIS")

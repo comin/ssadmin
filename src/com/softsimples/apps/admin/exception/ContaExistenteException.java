@@ -1,4 +1,4 @@
-package com.onetwork.apps.admin.domain;
+package com.softsimples.apps.admin.exception;
 
 public class ContaExistenteException extends Exception {
 

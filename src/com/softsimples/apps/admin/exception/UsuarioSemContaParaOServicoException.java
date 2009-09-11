@@ -1,4 +1,6 @@
-package com.onetwork.apps.admin.domain;
+package com.softsimples.apps.admin.exception;
+
+import com.softsimples.apps.admin.domain.Usuario;
 
 public class UsuarioSemContaParaOServicoException extends Exception {
 
