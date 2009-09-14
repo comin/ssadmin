@@ -1,5 +1,6 @@
 package com.softsimples.apps.admin.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.softsimples.apps.admin.exception.JaExisteUsuarioComEsteLoginException;
 
 @Entity
 @Table(name="USUARIO_MASTER")
@@ -25,7 +28,8 @@ public class UsuarioMaster extends Usuario {
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="USUARIO_MASTER")
 	public List<UsuarioSlave> getUsuarios() {
-		return usuarios;
+		if (this.usuarios == null) this.usuarios = new ArrayList<UsuarioSlave>();
+		return this.usuarios;
 	}
 
 	public void setUsuarios(List<UsuarioSlave> usuarios) {
@@ -36,5 +40,16 @@ public class UsuarioMaster extends Usuario {
 	@Transient
 	public boolean isMaster() {
 		return true;
+	}
+
+	public void jaExisteUsuarioSlaveComEsteLoginParaCadastro(String login) throws JaExisteUsuarioComEsteLoginException {
+		List<UsuarioSlave> slaves = this.getUsuarios();
+		for (UsuarioSlave usuarioSlave : slaves) {
+			if (usuarioSlave.getLogin().equals(login)) throw new JaExisteUsuarioComEsteLoginException();
+		}
+	}
+
+	public void adicionarUsuarioSlave(UsuarioSlave usuarioSlave) {
+		this.getUsuarios().add(usuarioSlave);
 	}
 }

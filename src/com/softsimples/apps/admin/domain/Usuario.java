@@ -41,8 +41,7 @@ public abstract class Usuario extends Domain {
 	private List<Endereco> enderecos;
 	private List<Conta> contas;
 	private PreferenciasPessoais preferenciasPessoais;
-	private boolean logado;
-	public static final String USUARIO_NAO_TEM_CONTA_PARA_ESTE_SERVICO = "Usuário não tem conta para este serviço"; 
+	private boolean logado; 
 	
 	public Usuario() {}
 	
