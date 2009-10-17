@@ -19,11 +19,6 @@ public class UsuarioController extends SecurityController<Usuario> {
 		setApplication(AdminActivatorImpl.getInstance().getApplication());
 	}
 
-	@Override
-	public Class<Usuario> getSessionClass() {
-		return Usuario.class;
-	}
-
 	@SemProtecaoDeAcesso
 	public void login() throws Exception {
 		Usuario user = Usuario.login(json());
