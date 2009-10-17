@@ -11,7 +11,7 @@ import org.json.JSONObjectImpl;
 import com.softsimples.apps.admin.AdminActivatorImpl;
 import com.softsimples.apps.admin.domain.Usuario;
 import com.softsimples.controller.SecurityController;
-import com.softsimples.controller.SemProtecaoDeAcesso;
+import com.softsimples.controller.MetodoPublico;
 
 public class UsuarioController extends SecurityController<Usuario> {
 
@@ -19,7 +19,7 @@ public class UsuarioController extends SecurityController<Usuario> {
 		setApplication(AdminActivatorImpl.getInstance().getApplication());
 	}
 
-	@SemProtecaoDeAcesso
+	@MetodoPublico
 	public void login() throws Exception {
 		Usuario user = Usuario.login(json());
 		noticaLoginOk(user);

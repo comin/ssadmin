@@ -4,14 +4,14 @@ import org.json.JSONObject;
 
 import com.softsimples.apps.admin.domain.Usuario;
 import com.softsimples.apps.admin.domain.UsuarioMaster;
-import com.softsimples.controller.SemProtecaoDeAcesso;
+import com.softsimples.controller.MetodoPublico;
 
 
 public class UsuarioMasterController extends UsuarioController {
 
 	public UsuarioMasterController() {}
 
-	@SemProtecaoDeAcesso
+	@MetodoPublico
 	public void adicionarUsuario() throws Exception {
 		JSONObject jsonObject = this.json();
 		Usuario.jaExisteUsuarioComEsteLoginParaCadastro(jsonObject.getString("login"));
