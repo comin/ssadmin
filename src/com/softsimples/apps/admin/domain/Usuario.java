@@ -18,7 +18,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.json.JSONObject;
-import org.json.JSONObjectImpl;
 
 import com.softsimples.apps.admin.exception.ContaExistenteException;
 import com.softsimples.apps.admin.exception.JaExisteUsuarioComEsteLoginException;
@@ -175,17 +174,6 @@ public abstract class Usuario extends Domain {
 		Usuario usuario = Usuario.findByLoginAndPassword(" obj.login = '"+json.getString("login")+"' AND obj.password = '"+json.getString("password")+"'");
 		if (usuario == null) throw new LoginOuPasswordException();
 		return usuario;
-	}
-	
-	public static JSONObject userToJSON(Usuario usuario) {
-		JSONObject jsonUser = new JSONObjectImpl();
-		jsonUser.put("nome",usuario.getNome());
-		jsonUser.put("login", usuario.getLogin());
-		jsonUser.put("password", usuario.getPassword());
-		jsonUser.put("enderecos", usuario.getEnderecos());
-		jsonUser.put("contas",usuario.getContas());
-		jsonUser.put("preferenciasPessoais",usuario.getPreferenciasPessoais());
-		return jsonUser;
 	}
 
 	public boolean isLogado() {

@@ -17,13 +17,13 @@ public class UsuarioMasterController extends UsuarioController {
 		Usuario.jaExisteUsuarioComEsteLoginParaCadastro(jsonObject.getString("login"));
 		UsuarioMaster usuarioMaster = buildNewInstance(UsuarioMaster.class, jsonObject);
 		usuarioMaster.save();
-		this.escreverVODeCadastroOK(usuarioMaster);
+		this.getView().adicionarUsuario(usuarioMaster);
 	}
 	
 	public void removerUsuario() throws Exception {
 		JSONObject jsonObject = this.json();
 		Usuario usuario = Usuario.existeUsuarioComEsteOidParaExclusao(jsonObject.getString("oid"));
 		usuario.delete();
-		this.escreverVODeCadastroOK(usuario);
+		this.getView().removerUsuario(usuario);
 	}
 }

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import com.softsimples.apps.admin.domain.Usuario;
 import com.softsimples.apps.admin.domain.UsuarioMaster;
 import com.softsimples.apps.admin.domain.UsuarioSlave;
+import com.softsimples.apps.admin.exception.UsuarioMasterRequeridoException;
 
 public class UsuarioSlaveController extends UsuarioController {
 
@@ -19,8 +20,8 @@ public class UsuarioSlaveController extends UsuarioController {
 			UsuarioSlave usuarioSlave = buildNewInstance(UsuarioSlave.class, jsonObject);
 			usuarioMaster.adicionarUsuarioSlave(usuarioSlave);
 			usuarioMaster.save();
-			this.escreverVODeCadastroOK(usuarioSlave);
-		} else throw new UsuarioMasterRequerido();
+			this.getView().adicionarUsuario(usuarioMaster);
+		} else throw new UsuarioMasterRequeridoException();
 		
 	}
 	
@@ -28,6 +29,6 @@ public class UsuarioSlaveController extends UsuarioController {
 		JSONObject jsonObject = this.json();
 		Usuario usuario = Usuario.existeUsuarioComEsteOidParaExclusao(jsonObject.getString("oid"));
 		usuario.delete();
-		this.escreverVODeCadastroOK(usuario);
+		this.getView().removerUsuario(usuario);
 	}
 }
