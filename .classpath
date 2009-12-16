@@ -3,20 +3,11 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="harness"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/hibernate-annotations.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate-commons-annotations.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate-entitymanager.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3.jar"/>
-	<classpathentry kind="lib" path="lib/ejb3-persistence.jar"/>
 	<classpathentry kind="lib" path="lib/json-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api-2.5-6.1.6.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sswebframework"/>
-	<classpathentry kind="lib" path="lib/hamcrest-core-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/hamcrest-library-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/jmock-2.5.1.jar"/>
 	<classpathentry kind="lib" path="lib/jmock-junit4-2.5.1.jar"/>
 	<classpathentry kind="lib" path="lib/junit-4.7-SNAPSHOT-20090511-2347.jar"/>
-	<classpathentry kind="lib" path="lib/mime-dir-j-api-2.2.0.jar"/>
-	<classpathentry kind="lib" path="lib/mime-dir-j-vcard4j-1.4.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

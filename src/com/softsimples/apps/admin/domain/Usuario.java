@@ -4,19 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.EntityManager;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import javax.persistence.Query;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
 import org.json.JSONObject;
 
 import com.softsimples.apps.admin.exception.ContaExistenteException;
@@ -25,10 +12,7 @@ import com.softsimples.apps.admin.exception.LoginOuPasswordException;
 import com.softsimples.apps.admin.exception.UsuarioNaoCadastradoException;
 import com.softsimples.apps.admin.exception.UsuarioSemContaParaOServicoException;
 import com.softsimples.domain.Domain;
-import com.softsimples.servlet.Resource;
-import com.softsimples.servlet.ResourceType;
 
-@MappedSuperclass
 public abstract class Usuario extends Domain {
 
 	private static final long serialVersionUID = 1L;
@@ -44,7 +28,6 @@ public abstract class Usuario extends Domain {
 	
 	public Usuario() {}
 	
-	@Column(name="NOME")
 	public String getNome() {
 		return nome;
 	}
@@ -53,7 +36,6 @@ public abstract class Usuario extends Domain {
 		this.nome = nome;
 	}
 
-	@Column(name="AVATAR")
 	public String getAvatar() {
 		return avatar;
 	}
@@ -62,7 +44,6 @@ public abstract class Usuario extends Domain {
 		this.avatar = avatar;
 	}
 
-	@Column(name="LOGIN")
 	public String getLogin() {
 		return login;
 	}
@@ -71,7 +52,6 @@ public abstract class Usuario extends Domain {
 		this.login = login;
 	}
 
-	@Column(name="PASSWORD")
 	public String getPassword() {
 		return password;
 	}
@@ -80,8 +60,6 @@ public abstract class Usuario extends Domain {
 		this.password = password;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="DATA_NASCIMENTO")
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
@@ -90,8 +68,6 @@ public abstract class Usuario extends Domain {
 		this.dataNascimento = dataNascimento;
 	}
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="USUARIO")
 	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
@@ -100,8 +76,6 @@ public abstract class Usuario extends Domain {
 		this.enderecos = enderecos;
 	}
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="USUARIO")
 	public List<Conta> getContas() {
 		if (contas == null) this.contas = new ArrayList<Conta>();
 		return contas;
@@ -130,8 +104,6 @@ public abstract class Usuario extends Domain {
 		return (T)conta;
 	}
 
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="PREFERENCIAS_PESSOAIS")
 	public PreferenciasPessoais getPreferenciasPessoais() {
 		return preferenciasPessoais;
 	}
@@ -145,35 +117,20 @@ public abstract class Usuario extends Domain {
 		return (user != null);
 	};
 
-	@SuppressWarnings("unchecked")
 	public static Usuario findByLogin(String login) {
-		EntityManager entityManager = Resource.get(ResourceType.PrevalentSystem);
-		Query query = entityManager.createQuery("from "+Usuario.class.getName()+" as obj where obj.login = '"+login+"'");
-		List<Usuario> listaUsuario = query.getResultList();
-		if (listaUsuario != null && listaUsuario.size() > 0) return listaUsuario.get(0); 
-		else return null;
+		return null;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static Usuario findByLoginAndPassword(String where) {
-		EntityManager entityManager = Resource.get(ResourceType.PrevalentSystem);
-		Query query = entityManager.createQuery("from "+Usuario.class.getName()+" as obj where "+where);
-		List<Usuario> listaUsuario = query.getResultList();
-		if (listaUsuario != null && listaUsuario.size() > 0) return listaUsuario.get(0); 
-		else return null;
+		return null;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static List<Usuario> findAll() {
-		EntityManager entityManager = Resource.get(ResourceType.PrevalentSystem);
-		Query query = entityManager.createQuery("from "+Usuario.class.getName()+" as obj");
-		return (List<Usuario>)query.getResultList();
+		return null;
 	}
 
 	public static Usuario login(JSONObject json) throws LoginOuPasswordException {
-		Usuario usuario = Usuario.findByLoginAndPassword(" obj.login = '"+json.getString("login")+"' AND obj.password = '"+json.getString("password")+"'");
-		if (usuario == null) throw new LoginOuPasswordException();
-		return usuario;
+		return null;
 	}
 
 	public boolean isLogado() {
@@ -184,7 +141,6 @@ public abstract class Usuario extends Domain {
 		this.logado = estaLogado;
 	}
 	
-	@Transient
 	public abstract boolean isMaster();
 	
 	public void setMaster(boolean master){};

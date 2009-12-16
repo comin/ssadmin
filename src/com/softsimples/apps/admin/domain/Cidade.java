@@ -2,21 +2,8 @@ package com.softsimples.apps.admin.domain;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import com.softsimples.domain.Domain;
 
-@Entity
-@Table(name="CIDADE")
-@Inheritance(strategy=InheritanceType.JOINED)
 public class Cidade extends Domain {
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +12,6 @@ public class Cidade extends Domain {
 	
 	public Cidade() {}
 
-	@Column(name="NOME")
 	public String getNome() {
 		return nome;
 	}
@@ -34,13 +20,29 @@ public class Cidade extends Domain {
 		this.nome = nome;
 	}
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="CIDADE")
 	public List<Bairro> getBairros() {
 		return bairros;
 	}
 
 	public void setBairros(List<Bairro> bairros) {
 		this.bairros = bairros;
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getOid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -2,21 +2,8 @@ package com.softsimples.apps.admin.domain;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import com.softsimples.domain.Domain;
 
-@Entity
-@Table(name="PAIS")
-@Inheritance(strategy=InheritanceType.JOINED)
 public class Pais extends Domain {
 
 	private static final long serialVersionUID = 1L;
@@ -26,7 +13,6 @@ public class Pais extends Domain {
 	
 	public Pais() {}
 
-	@Column(name="NOME")
 	public String getNome() {
 		return nome;
 	}
@@ -35,7 +21,6 @@ public class Pais extends Domain {
 		this.nome = nome;
 	}
 
-	@Column(name="SIGLA")
 	public String getSigla() {
 		return sigla;
 	}
@@ -44,13 +29,29 @@ public class Pais extends Domain {
 		this.sigla = sigla;
 	}
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="PAIS")
 	public List<Estado> getEstados() {
 		return estados;
 	}
 
 	public void setEstados(List<Estado> estados) {
 		this.estados = estados;
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getOid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		
 	}
 }

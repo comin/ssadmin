@@ -1,16 +1,7 @@
 package com.softsimples.apps.admin.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
-
 import com.softsimples.domain.Domain;
 
-@Entity
-@Table(name="PREFERENCIAS_PESSOAIS")
-@Inheritance(strategy=InheritanceType.JOINED)
 public class PreferenciasPessoais extends Domain {
 
 	private static final long serialVersionUID = 1L;
@@ -22,7 +13,6 @@ public class PreferenciasPessoais extends Domain {
 
 	public PreferenciasPessoais() {}
 
-	@Column(name="ESPORTES")
 	public boolean isEsportes() {
 		return esportes;
 	}
@@ -31,7 +21,6 @@ public class PreferenciasPessoais extends Domain {
 		this.esportes = esportes;
 	}
 
-	@Column(name="TECNOLOGIA")
 	public boolean isTecnologia() {
 		return tecnologia;
 	}
@@ -40,7 +29,6 @@ public class PreferenciasPessoais extends Domain {
 		this.tecnologia = tecnologia;
 	}
 
-	@Column(name="NEGOCIOS")
 	public boolean isNegocios() {
 		return negocios;
 	}
@@ -49,7 +37,6 @@ public class PreferenciasPessoais extends Domain {
 		this.negocios = negocios;
 	}
 
-	@Column(name="RELACIONAMENTOS")
 	public boolean isRelacionamentos() {
 		return relacionamentos;
 	}
@@ -58,12 +45,29 @@ public class PreferenciasPessoais extends Domain {
 		this.relacionamentos = relacionamentos;
 	}
 
-	@Column(name="JOGOS_ELETRONICOS")
 	public boolean isJogosEletronicos() {
 		return jogosEletronicos;
 	}
 
 	public void setJogosEletronicos(boolean jogosEletronicos) {
 		this.jogosEletronicos = jogosEletronicos;
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getOid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		
 	}
 }

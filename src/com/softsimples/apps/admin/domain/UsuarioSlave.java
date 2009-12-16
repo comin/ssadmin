@@ -1,15 +1,5 @@
 package com.softsimples.apps.admin.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-@Entity
-@Table(name="USUARIO_SLAVE")
-@Inheritance(strategy=InheritanceType.JOINED)
 public class UsuarioSlave extends Usuario {
 	
 	private static final long serialVersionUID = 1L;
@@ -17,7 +7,6 @@ public class UsuarioSlave extends Usuario {
 
 	public UsuarioSlave() {}
 
-	@Column(name="PERMISSOES_MASTER")
 	public boolean isTemPermissoesDeMaster() {
 		return temPermissoesDeMaster;
 	}
@@ -27,8 +16,25 @@ public class UsuarioSlave extends Usuario {
 	}
 
 	@Override
-	@Transient
 	public boolean isMaster() {
 		return this.temPermissoesDeMaster;
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getOid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		
 	}
 }

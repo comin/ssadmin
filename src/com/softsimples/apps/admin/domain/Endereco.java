@@ -1,22 +1,7 @@
 package com.softsimples.apps.admin.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import com.softsimples.domain.Domain;
 
-@Entity
-@Table(name="ENDERECO")
-@Inheritance(strategy=InheritanceType.JOINED)
 public class Endereco extends Domain {
 
 	private static final long serialVersionUID = 1L;
@@ -29,7 +14,6 @@ public class Endereco extends Domain {
 	
 	public Endereco() {}
 
-	@Column(name="LOGRADOURO")
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -38,7 +22,6 @@ public class Endereco extends Domain {
 		this.logradouro = logradouro;
 	}
 
-	@Column(name="NUMERO")
 	public String getNumero() {
 		return numero;
 	}
@@ -47,7 +30,6 @@ public class Endereco extends Domain {
 		this.numero = numero;
 	}
 
-	@Column(name="COMPLEMENTO")
 	public String getComplemento() {
 		return complemento;
 	}
@@ -56,7 +38,6 @@ public class Endereco extends Domain {
 		this.complemento = complemento;
 	}
 
-	@Column(name="CEP")
 	public String getCep() {
 		return cep;
 	}
@@ -65,8 +46,6 @@ public class Endereco extends Domain {
 		this.cep = cep;
 	}
 
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="BAIRRO")
 	public Bairro getBairro() {
 		return bairro;
 	}
@@ -75,13 +54,29 @@ public class Endereco extends Domain {
 		this.bairro = bairro;
 	}
 
-	@Column(name="TIPO_ENDERECO")
-	@Enumerated(EnumType.STRING)
 	public TipoEndereco getTipoEndereco() {
 		return tipoEndereco;
 	}
 
 	public void setTipoEndereco(TipoEndereco tipoEndereco) {
 		this.tipoEndereco = tipoEndereco;
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getOid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		
 	}	
 }

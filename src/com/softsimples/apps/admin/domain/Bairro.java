@@ -1,18 +1,8 @@
 package com.softsimples.apps.admin.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
-
 import com.softsimples.domain.Domain;
 
-@Entity
-@Table(name = "BAIRRO")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Bairro extends Domain {
-
 
 	private static final long serialVersionUID = 1L;
 	private String nome;
@@ -20,7 +10,6 @@ public class Bairro extends Domain {
 	
 	public Bairro() {}
 
-	@Column(name = "NOME")
 	public String getNome() {
 		return nome;
 	}
@@ -29,12 +18,29 @@ public class Bairro extends Domain {
 		this.nome = nome;
 	}
 
-	@Column(name = "SIGLA")
 	public String getSigla() {
 		return sigla;
 	}
 
 	public void setSigla(String sigla) {
 		this.sigla = sigla;
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getOid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		
 	}
 }

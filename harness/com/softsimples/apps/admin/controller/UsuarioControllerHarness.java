@@ -6,8 +6,6 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -37,9 +35,7 @@ public class UsuarioControllerHarness {
 			final Map<String, Object> parameters = context.mock(Map.class);
 			final HttpServletResponse response = context.mock(HttpServletResponse.class);
 			final HttpSession httpSession = context.mock(HttpSession.class);
-			final EntityManager entityManager = context.mock(EntityManager.class);
 			final DomainInstanceBuilder domainInstanceBuilder = context.mock(DomainInstanceBuilder.class);
-			final Query query = context.mock(Query.class);
 			final List<Usuario> usuarios = context.mock(List.class);
 			final StringWriter stringWriter = new StringWriter();
 			final PrintWriter printWriter = new PrintWriter(stringWriter);
@@ -51,12 +47,6 @@ public class UsuarioControllerHarness {
 			    
 			    oneOf (jsonObject).getString("login");
 			    will(returnValue("agnaldo@teste.com"));
-			    
-			    oneOf (entityManager).createQuery("from com.softsimples.apps.admin.domain.Usuario as obj where obj.login = 'agnaldo@teste.com'");
-			    will(returnValue(query));
-			    
-			    oneOf (query).getResultList();
-			    will(returnValue(usuarios));
 			    
 			    oneOf (usuarios).size();
 			    will(returnValue(0));
@@ -124,14 +114,10 @@ public class UsuarioControllerHarness {
 			    oneOf (jsonObject).has("usuarios");
 			    will(returnValue(false));
 			    
-			    oneOf (entityManager).persist(usuario);
-			    oneOf (entityManager).flush();
-			    
 			    oneOf (response).getWriter();
 			    will(returnValue(printWriter));
 			}});
 			
-			Resource.add(ResourceType.PrevalentSystem, entityManager);
 			Resource.add(ResourceType.Parameters, parameters);
 			Resource.add(ResourceType.HttpServletResponse, response);
 			Resource.add(ResourceType.HttpServletSession, httpSession);
@@ -166,9 +152,7 @@ public class UsuarioControllerHarness {
 			final Map<String, Object> parameters = context.mock(Map.class);
 			final HttpServletResponse response = context.mock(HttpServletResponse.class);
 			final HttpSession httpSession = context.mock(HttpSession.class);
-			final EntityManager entityManager = context.mock(EntityManager.class);
 			final DomainInstanceBuilder domainInstanceBuilder = context.mock(DomainInstanceBuilder.class);
-			final Query query = context.mock(Query.class);
 			final List<Usuario> usuarios = context.mock(List.class);
 			final StringWriter stringWriter = new StringWriter();
 			final PrintWriter printWriter = new PrintWriter(stringWriter);
@@ -178,12 +162,6 @@ public class UsuarioControllerHarness {
 			context.checking(new Expectations() {{
 				oneOf (httpSession).getAttribute("idUsuario");
 			    will(returnValue("1234567890"));
-			    
-			    oneOf (entityManager).createQuery("from com.softsimples.apps.admin.domain.Usuario as obj where obj.oid = '1234567890'");
-			    will(returnValue(query));
-			    
-			    oneOf (query).getResultList();
-			    will(returnValue(usuarios));
 			    
 			    oneOf (usuarios).size();
 			    will(returnValue(1));
@@ -196,12 +174,6 @@ public class UsuarioControllerHarness {
 			    
 			    oneOf (jsonObject).getString("login");
 			    will(returnValue("agnaldo@teste.com"));
-			    
-			    oneOf (entityManager).createQuery("from com.softsimples.apps.admin.domain.Usuario as obj where obj.login = 'agnaldo@teste.com'");
-			    will(returnValue(query));
-			    
-			    oneOf (query).getResultList();
-			    will(returnValue(usuarios));
 			    
 			    oneOf (usuarios).size();
 			    will(returnValue(0));
@@ -272,14 +244,10 @@ public class UsuarioControllerHarness {
 			    oneOf (jsonObject).has("usuarios");
 			    will(returnValue(false));
 			    
-			    oneOf (entityManager).persist(usuarioMaster);
-			    oneOf (entityManager).flush();
-			    
 			    oneOf (response).getWriter();
 			    will(returnValue(printWriter));
 			}});
 			
-			Resource.add(ResourceType.PrevalentSystem, entityManager);
 			Resource.add(ResourceType.Parameters, parameters);
 			Resource.add(ResourceType.HttpServletResponse, response);
 			Resource.add(ResourceType.HttpServletSession, httpSession);
