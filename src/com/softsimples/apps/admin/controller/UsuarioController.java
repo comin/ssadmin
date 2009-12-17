@@ -27,10 +27,10 @@ public class UsuarioController extends SecurityController<Usuario> {
 		this.getView().login(usuario);
 	}
 	
-	public void logout() throws IOException {
+	public void logout() throws Exception {
 		Usuario usuario =  this.getUsuarioDaSessao();
 		usuario.setLogado(false);
-		usuario.save();
+		usuario.save(this.getApplication());
 		this.setUsuarioDaSessao(null);
 		this.getView().logout(usuario);
 	}

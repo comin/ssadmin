@@ -19,7 +19,7 @@ public class UsuarioSlaveController extends UsuarioController {
 			usuarioMaster.jaExisteUsuarioSlaveComEsteLoginParaCadastro(jsonObject.getString("login"));
 			UsuarioSlave usuarioSlave = buildNewInstance(UsuarioSlave.class, jsonObject);
 			usuarioMaster.adicionarUsuarioSlave(usuarioSlave);
-			usuarioMaster.save();
+			usuarioMaster.save(this.getApplication());
 			this.getView().adicionarUsuario(usuarioMaster);
 		} else throw new UsuarioMasterRequeridoException();
 		
@@ -28,7 +28,7 @@ public class UsuarioSlaveController extends UsuarioController {
 	public void removerUsuario() throws Exception {
 		JSONObject jsonObject = this.json();
 		Usuario usuario = Usuario.existeUsuarioComEsteOidParaExclusao(jsonObject.getString("oid"));
-		usuario.delete();
+		usuario.delete(this.getApplication());
 		this.getView().removerUsuario(usuario);
 	}
 }

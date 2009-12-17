@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import com.softsimples.apps.admin.AdminActivatorImpl;
 import com.softsimples.apps.admin.exception.ContaExistenteException;
 import com.softsimples.apps.admin.exception.JaExisteUsuarioComEsteLoginException;
 import com.softsimples.apps.admin.exception.LoginOuPasswordException;
@@ -15,7 +16,6 @@ import com.softsimples.domain.Domain;
 
 public abstract class Usuario extends Domain {
 
-	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String avatar;	
 	private String login;
@@ -156,8 +156,8 @@ public abstract class Usuario extends Domain {
 		if (usuario != null) throw new JaExisteUsuarioComEsteLoginException();
 	}
 	
-	public static Usuario existeUsuarioComEsteOidParaExclusao(String oid) throws UsuarioNaoCadastradoException {
-		Usuario usuario = Usuario.findByOid(Usuario.class, oid);
+	public static Usuario existeUsuarioComEsteOidParaExclusao(String oid) throws Exception {
+		Usuario usuario = Usuario.findByOid(AdminActivatorImpl.getInstance().getApplication(), Usuario.class, oid);
 		if (usuario != null) throw new UsuarioNaoCadastradoException();
 		return usuario;
 	}

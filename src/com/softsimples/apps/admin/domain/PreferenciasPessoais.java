@@ -4,7 +4,6 @@ import com.softsimples.domain.Domain;
 
 public class PreferenciasPessoais extends Domain {
 
-	private static final long serialVersionUID = 1L;
 	private boolean esportes;
 	private boolean tecnologia;
 	private boolean negocios;
@@ -51,23 +50,5 @@ public class PreferenciasPessoais extends Domain {
 
 	public void setJogosEletronicos(boolean jogosEletronicos) {
 		this.jogosEletronicos = jogosEletronicos;
-	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getOid() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-		
 	}
 }

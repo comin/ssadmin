@@ -4,8 +4,6 @@ import com.softsimples.domain.Domain;
 
 public abstract class Conta extends Domain {
 
-	private static final long serialVersionUID = 1L;
-
 	private int acessos;
 	private boolean ativa;
 	private TipoConta tipoConta;

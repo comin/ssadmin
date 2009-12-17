@@ -6,7 +6,6 @@ import com.softsimples.domain.Domain;
 
 public class Cidade extends Domain {
 
-	private static final long serialVersionUID = 1L;
 	private String nome;
 	private List<Bairro> bairros; 
 	
@@ -26,23 +25,5 @@ public class Cidade extends Domain {
 
 	public void setBairros(List<Bairro> bairros) {
 		this.bairros = bairros;
-	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getOid() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-		
 	}
 }

@@ -6,7 +6,6 @@ import com.softsimples.domain.Domain;
 
 public class Estado extends Domain {
 
-	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String uf;
 	private List<Cidade> cidades;
@@ -35,23 +34,5 @@ public class Estado extends Domain {
 
 	public void setCidades(List<Cidade> cidades) {
 		this.cidades = cidades;
-	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getOid() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-		
 	}
 }

@@ -7,7 +7,6 @@ import com.softsimples.apps.admin.exception.JaExisteUsuarioComEsteLoginException
 
 public class UsuarioMaster extends Usuario {
 
-	private static final long serialVersionUID = 1L;
 	private List<UsuarioSlave> usuarios;
 	
 	public UsuarioMaster() {}
@@ -35,23 +34,5 @@ public class UsuarioMaster extends Usuario {
 
 	public void adicionarUsuarioSlave(UsuarioSlave usuarioSlave) {
 		this.getUsuarios().add(usuarioSlave);
-	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getOid() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-		
 	}
 }

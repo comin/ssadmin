@@ -4,7 +4,6 @@ import com.softsimples.domain.Domain;
 
 public class Endereco extends Domain {
 
-	private static final long serialVersionUID = 1L;
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -61,22 +60,4 @@ public class Endereco extends Domain {
 	public void setTipoEndereco(TipoEndereco tipoEndereco) {
 		this.tipoEndereco = tipoEndereco;
 	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getOid() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-		
-	}	
 }
