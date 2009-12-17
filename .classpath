@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/jmock-2.5.1.jar"/>
 	<classpathentry kind="lib" path="lib/jmock-junit4-2.5.1.jar"/>
 	<classpathentry kind="lib" path="lib/junit-4.7-SNAPSHOT-20090511-2347.jar"/>
+	<classpathentry kind="lib" path="lib/mongo-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

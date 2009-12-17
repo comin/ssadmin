@@ -26,10 +26,10 @@ public class UsuarioMaster extends Usuario {
 	}
 
 	public void jaExisteUsuarioSlaveComEsteLoginParaCadastro(String login) throws JaExisteUsuarioComEsteLoginException {
-		List<UsuarioSlave> slaves = this.getUsuarios();
-		for (UsuarioSlave usuarioSlave : slaves) {
-			if (usuarioSlave.getLogin().equals(login)) throw new JaExisteUsuarioComEsteLoginException();
-		}
+//		List<UsuarioSlave> slaves = this.getUsuarios();
+//		for (UsuarioSlave usuarioSlave : slaves) {
+//			if (usuarioSlave.getLogin().equals(login)) throw new JaExisteUsuarioComEsteLoginException();
+//		}
 	}
 
 	public void adicionarUsuarioSlave(UsuarioSlave usuarioSlave) {

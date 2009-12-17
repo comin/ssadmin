@@ -1,5 +1,5 @@
 package com.softsimples.apps.admin.domain;
 
-public enum TipoConta {
+public enum TipoAssinatura {
 	Gratis,Bronze,Prata,Ouro;
 }

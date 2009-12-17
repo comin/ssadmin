@@ -20,14 +20,14 @@ public class UsuarioView extends View {
 	
 	public void login(Usuario usuario) throws IOException {
 		JSONObject jsonUser = new JSONObjectImpl();
-		jsonUser.put("oid", usuario.getOid());
-		jsonUser.put("nome", usuario.getNome());
+//		jsonUser.put("oid", usuario.getOid());
+//		jsonUser.put("nome", usuario.getNome());
 		this.write(jsonUser);
 	}
 	
 	public void logout(Usuario usuario) throws IOException {
 		JSONObject jsonUser = new JSONObjectImpl();
-		jsonUser.put("nome", usuario.getNome());
+//		jsonUser.put("nome", usuario.getNome());
 		this.write(jsonUser);
 	}
 	
@@ -43,13 +43,13 @@ public class UsuarioView extends View {
 		JSONArray jsonUsers = new JSONArrayImpl();
 		if (usuarios != null) for (Usuario usuario : usuarios) {
 			JSONObject jsonUser = new JSONObjectImpl();
-			jsonUser.put("nome",usuario.getNome());
-			jsonUser.put("login", usuario.getLogin());
-			jsonUser.put("password", usuario.getPassword());
-			jsonUser.put("enderecos", usuario.getEnderecos());
-			jsonUser.put("contas",usuario.getContas());
-			jsonUser.put("preferenciasPessoais",usuario.getPreferenciasPessoais());
-			jsonUsers.put(jsonUser);
+//			jsonUser.put("nome",usuario.getNome());
+//			jsonUser.put("login", usuario.getLogin());
+//			jsonUser.put("password", usuario.getPassword());
+//			jsonUser.put("enderecos", usuario.getEnderecos());
+//			jsonUser.put("contas",usuario.getContas());
+//			jsonUser.put("preferenciasPessoais",usuario.getPreferenciasPessoais());
+//			jsonUsers.put(jsonUser);
 		}
 		this.write(jsonUsers);
 	}
@@ -57,7 +57,7 @@ public class UsuarioView extends View {
 	private void escreverVOPadraoParaOperacoesDeAdicionarERemover(Usuario usuario) throws IOException {
 		JSONObject vo = new JSONObjectImpl();
 		vo.put("oid", usuario.getOid());
-		vo.put("nome", usuario.getNome());
+//		vo.put("nome", usuario.getNome());
 		this.write(vo);
 	}
 }
